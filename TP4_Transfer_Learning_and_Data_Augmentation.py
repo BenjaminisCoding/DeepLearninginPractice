@@ -279,3 +279,12 @@ def vae_loss(out, x):
     bce = F.mse_loss(recon_x, x, reduction='sum')
     kld = -0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp())
     return bce + kld
+
+def freeze_weights(model):
+    '''
+    Freeze every weights
+    '''
+
+    for param in model.parameters():
+        param.requires_grad = False 
+    
